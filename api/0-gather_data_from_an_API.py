@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-import requests
-import sys
-
 ''' This script will gather data from an employee ID and returns
     information about his/her list progress '''
+import requests
+import sys
 
 def get_employee_name(employee_id):
     ''' This function will return the name of the employee '''
