@@ -44,7 +44,9 @@ def print_employee_status(employee_name, completed_tasks, assigned_tasks):
         print("\t {}".format(task))
     with open ('{}.csv'.format(employee_id), 'w') as f:
         for task in completed_tasks:
-            f.write('"{}","{}","{}","{}"\n'.format(employee_id, employee_name, task.get("completed"), task.get("title")))
+            f.write('"{}","{}","{}","{}"\n'.format(employee_id, employee_name,
+                                                   task.get("completed"),
+                                                   task.get("title")))
 
 
 if __name__ == "__main__":
@@ -54,4 +56,3 @@ if __name__ == "__main__":
     assigned_tasks = get_assigned_tasks(employee_id)
     completed_tasks = get_completed_tasks(employee_id)
     print_employee_status(employee_name, completed_tasks, assigned_tasks)
-
