@@ -4,11 +4,13 @@
 import requests
 import sys
 
+
 def get_employee_name(employee_id):
     ''' This function will return the name of the employee '''
     url = "{}/{}".format(base_url, employee_id)
     response = requests.get(url)
     return response.json().get("name")
+
 
 def get_assigned_tasks(employee_id):
     ''' This function will return the number of all tasks
@@ -16,6 +18,7 @@ def get_assigned_tasks(employee_id):
     url = "{}/{}/todos".format(base_url, employee_id)
     response = requests.get(url)
     return len(response.json())
+
 
 def get_completed_tasks(employee_id):
     ''' This function will return the number of tasks
@@ -28,11 +31,15 @@ def get_completed_tasks(employee_id):
             finished_tasks.append(task.get("title"))
     return finished_tasks
 
+
 def print_employee_status(employee_name, completed_tasks, assigned_tasks):
     ''' This function will return the information about the employee'''
-    print("Employee {} is done with tasks({}/{}):".format(employee_name, len(completed_tasks), assigned_tasks))
+    print("Employee {} is done with tasks({}/{}):".format(employee_name,
+                                                          len(completed_tasks),
+                                                          assigned_tasks))
     for task in completed_tasks:
         print("\t {}".format(task))
+
 
 if __name__ == "__main__":
     employee_id = sys.argv[1]
