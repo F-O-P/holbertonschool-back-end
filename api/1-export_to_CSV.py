@@ -9,15 +9,18 @@ def get_employee_name(employee_id):
     ''' This function will return the name of the employee '''
     url = "{}/{}".format(base_url, employee_id)
     response = requests.get(url)
-    return response.json().get("name")
+    return response.json().get("username")
 
 
 def get_assigned_tasks(employee_id):
     ''' This function will return the number of all tasks
         assigned to that the employee '''
+    assigned_tasks = []
     url = "{}/{}/todos".format(base_url, employee_id)
     response = requests.get(url)
-    return len(response.json())
+    for task in response.json():
+        assigned_tasks.append(task)
+    return assigned_tasks
 
 
 def get_completed_tasks(employee_id):
@@ -36,9 +39,12 @@ def print_employee_status(employee_name, completed_tasks, assigned_tasks):
     ''' This function will return the information about the employee'''
     print("Employee {} is done with tasks({}/{}):".format(employee_name,
                                                           len(completed_tasks),
-                                                          assigned_tasks))
+                                                          len(assigned_tasks)))
     for task in completed_tasks:
         print("\t {}".format(task))
+    with open ('{}.csv'.format(employee_id), 'w') as f:
+        for task in completed_tasks:
+            f.write('"{}","{}","{}","{}"\n'.format(employee_id, employee_name, task.get("completed"), task.get("title")))
 
 
 if __name__ == "__main__":
@@ -48,3 +54,4 @@ if __name__ == "__main__":
     assigned_tasks = get_assigned_tasks(employee_id)
     completed_tasks = get_completed_tasks(employee_id)
     print_employee_status(employee_name, completed_tasks, assigned_tasks)
+
