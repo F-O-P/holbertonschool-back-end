@@ -18,7 +18,7 @@ def get_assigned_tasks(employee_id):
         assigned to that the employee '''
     url = "{}/{}/todos".format(base_url, employee_id)
     response = requests.get(url)
-    return len(response.json())
+    return response.json()
 
 
 def get_completed_tasks(employee_id):
@@ -37,13 +37,13 @@ def print_employee_status(employee_name, completed_tasks, assigned_tasks):
     ''' This function will return the information about the employee'''
     print("Employee {} is done with tasks({}/{}):".format(employee_name,
                                                           len(completed_tasks),
-                                                          assigned_tasks))
+                                                          len(assigned_tasks)))
     for task in completed_tasks:
         print("\t {}".format(task))
  
     with open("{}.json".format(employee_id), "w") as json_file:
-        for task in completed_tasks:
-            json.dump({employee_id: completed_tasks}, json_file)
+        for task in assigned_tasks:
+            json.dump({employee_id: assigned_tasks}, json_file)
 
 
 if __name__ == "__main__":
