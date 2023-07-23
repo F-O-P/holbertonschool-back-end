@@ -42,7 +42,7 @@ def print_employee_status(employee_name, completed_tasks, assigned_tasks):
     for task in completed_tasks:
         print("\t {}".format(task))
 
-    with open ('{}.csv'.format(employee_id), 'w') as csv_file:
+    with open('{}.csv'.format(employee_id), 'w') as csv_file:
         writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
         for task in assigned_tasks:
             writer.writerow([employee_id, employee_name, task.get("completed"),
