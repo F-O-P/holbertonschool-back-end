@@ -40,7 +40,7 @@ def print_employee_status(employee_name, completed_tasks, assigned_tasks):
                                                           assigned_tasks))
     for task in completed_tasks:
         print("\t {}".format(task))
-    
+ 
     with open("{}.json".format(employee_id), "w") as json_file:
         for task in completed_tasks:
             json.dump({employee_id: completed_tasks}, json_file)
