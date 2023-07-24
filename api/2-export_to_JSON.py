@@ -45,13 +45,12 @@ def print_employee_status(employee_name, completed_tasks, assigned_tasks):
 def save_to_json(employee_id, assigned_tasks, employee_name):
     ''' This function will save the status of the employee
         in a json file '''
+    fin = "completed"
     writeFile = open("{}.json".format(employee_id), "w")
     writeFile.write(json.dumps({employee_id: [{"task": task.get("title"),
-                                               "completed": task.get("completed"),
+                                               fin: task.get(fin),
                                                "username": employee_name}
                                               for task in assigned_tasks]}))
-
-
 
 
 if __name__ == "__main__":
